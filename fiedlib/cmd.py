@@ -26,25 +26,12 @@ DISCLAIMER = """
 """
 
 
-def remove_js_comments(code):
+def remove_js_comments(string):
     import re
 
-    reexpr = r"""
-        (                           # Capture code
-            "(?:\\.|[^"\\])*"       # String literal
-            |
-            '(?:\\.|[^'\\])*'       # String literal
-            |
-            (?:[^/\n"']|/[^/*\n"'])+ # Any code besides newlines or string literals
-            |
-            \n                      # Newline
-        )|
-        (/\*  (?:[^*]|\*[^/])*   \*/)        # Multi-line comment
-        |
-        (?://(.*)$)                 # Comment
-        $"""
-    rx = re.compile(reexpr, re.VERBOSE + re.MULTILINE)
-    return rx.findall(code)
+    string = re.sub(re.compile("/\*.*?\*/",re.DOTALL ) ,"" ,string) # remove all occurance streamed comments (/*COMMENT */) from string
+    string = re.sub(re.compile("//.*?\n" ) ,"" ,string) # remove all occurance singleline comments (//COMMENT\n ) from string
+    return string
 
 
 class Ferrified():
