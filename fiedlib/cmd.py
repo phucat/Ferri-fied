@@ -28,10 +28,10 @@ DISCLAIMER = """
 
 def remove_js_comments(string):
     import re
-
-    string = re.sub(re.compile("/\*.*?\*/",re.DOTALL ) ,"" ,string) # remove all occurance streamed comments (/*COMMENT */) from string
-    string = re.sub(re.compile("//.*?\n" ) ,"" ,string) # remove all occurance singleline comments (//COMMENT\n ) from string
-    return string
+    # remove all occurance streamed comments (/*COMMENT */) from string
+    string = re.sub(re.compile("/\*.*?\*/", re.DOTALL), "", string)
+    # remove all occurance singleline comments (//COMMENT\n ) from string
+    return re.sub(re.compile("//.*?\n"), "", string)
 
 
 class Ferrified():
